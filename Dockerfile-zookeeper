@@ -23,19 +23,19 @@ RUN apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
 # Define las variables
-ARG KAFKA_USER_HOME=/usr/local/kafka
-ENV KAFKA_HOME=${KAFKA_USER_HOME}
+ARG ZOO_USER_HOME=/usr/local/zookeeper
+ENV ZOO_HOME=${ZOO_USER_HOME}
 
 # Establece el directorio de trabajo
-WORKDIR ${KAFKA_HOME}
+WORKDIR ${ZOO_HOME}
 
 # Install dependencies
-COPY requirements.txt ${KAFKA_HOME}
+COPY requirements.txt ${ZOO_HOME}
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project
-COPY apache-zookeeper-3.8.1-bin ${KAFKA_HOME}
+COPY apache-zookeeper-3.8.1-bin ${ZOO_HOME}
 
 EXPOSE 2181 2888 3888
 
-CMD ["apache-zookeeper-3.8.1-bin/bin/zkServer.sh", "start"]
+CMD ["bin/zkServer.sh", "start"]

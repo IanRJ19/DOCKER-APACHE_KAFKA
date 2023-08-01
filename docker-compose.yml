@@ -12,7 +12,7 @@ services:
     environment:
       - KAFKA_USER_HOME=/usr/local/kafka
     volumes:
-      - ./:/usr/local/kafka
+      - apache-zookeeper-3.8.1-bin:/usr/local/kafka  # replace with the actual directory
     restart: always
 
   kafka:
@@ -24,7 +24,7 @@ services:
     environment:
       - KAFKA_USER_HOME=/usr/local/kafka
     volumes:
-      - ./:/usr/local/kafka
+      - kafka_2.13-3.5.0:/usr/local/kafka  # replace with the actual directory
     depends_on:
       - zookeeper
     restart: always
