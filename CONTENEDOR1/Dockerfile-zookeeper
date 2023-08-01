@@ -1,43 +1,13 @@
-# Dockerfile-zookeeper
-# Basado en la imagen oficial de Python
-FROM python:3.10.12-slim-bullseye
+FROM eclipse-temurin:11-jre
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-# Actualizar e instalar dependencias del sistema
-RUN apt-get update -y \
-  && apt-get upgrade -y \
-  && apt-get install -y --no-install-recommends \
-    ufw net-tools bleachbit wget git gdebi curl \
-    build-essential gdb lcov pkg-config libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev \
-    libncurses5-dev libreadline6-dev libsqlite3-dev libssl-dev lzma lzma-dev tk-dev uuid-dev zlib1g-dev \
-    libpq-dev lsof
-
-# Install OpenJDK
-RUN apt-get install -y openjdk-11-jdk
-
-# Limpiar el caché de apt
-RUN apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
-
-# Define las variables
 ARG ZOO_USER_HOME=/usr/local/zookeeper
 ENV ZOO_HOME=${ZOO_USER_HOME}
 
-# Establece el directorio de trabajo
 WORKDIR ${ZOO_HOME}
 
-# Install dependencies
-COPY requirements.txt ${ZOO_HOME}
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy project
 COPY apache-zookeeper-3.8.1-bin ${ZOO_HOME}
 
-#EXPOSE 2181 2888 3888
-EXPOSE 2181
+EXPOSE 2181 2888 3888
 
+CMD ["bin/zkServer.sh", "start-foreground"]
 
-CMD ["bin/zkServer.sh", "start"]
