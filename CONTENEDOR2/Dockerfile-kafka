@@ -34,8 +34,8 @@ COPY requirements.txt ${KAFKA_HOME}
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project
-COPY apache-zookeeper-3.8.1-bin ${KAFKA_HOME}
+COPY kafka_2.13-3.5.0 ${KAFKA_HOME}
 
 EXPOSE 9092
 
-CMD ["kafka_2.13-3.5.0/bin/kafka-server-start.sh", "kafka_2.13-3.5.0/config/server.properties"]
+CMD ["bin/kafka-server-start.sh", "config/server.properties"]

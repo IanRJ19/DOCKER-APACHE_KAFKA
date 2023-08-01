@@ -36,6 +36,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project
 COPY apache-zookeeper-3.8.1-bin ${ZOO_HOME}
 
-EXPOSE 2181 2888 3888
+#EXPOSE 2181 2888 3888
+EXPOSE 2181
+
 
 CMD ["bin/zkServer.sh", "start"]
