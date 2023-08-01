@@ -34,7 +34,7 @@ COPY requirements.txt ${KAFKA_HOME}
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project
-COPY . ${KAFKA_HOME}
+COPY apache-zookeeper-3.8.1-bin ${KAFKA_HOME}
 
 EXPOSE 2181 2888 3888
 
