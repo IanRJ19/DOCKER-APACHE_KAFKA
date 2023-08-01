@@ -38,4 +38,4 @@ COPY . ${KAFKA_HOME}
 
 EXPOSE 9092
 
-CMD ["kafka_2.13-3.5.0/bin/kafka-server-start.sh", "config/server.properties"]
+CMD ["kafka_2.13-3.5.0/bin/kafka-server-start.sh", "kafka_2.13-3.5.0/config/server.properties"]
